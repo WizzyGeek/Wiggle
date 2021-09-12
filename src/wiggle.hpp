@@ -37,8 +37,8 @@ namespace wiggle {
 
         public:
             Wiggler() {
-                width = 15;
-                height = 90;
+                width = 30;
+                height = 45;
                 delay = 40;
             };
 

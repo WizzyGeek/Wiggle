@@ -33,7 +33,7 @@ int main(int argc, char *argv[]) {
 
     if (argc == 1) {
         height = 80;
-        width = 40;
+        width = 80;
         delay = 40;
         infinite = false;
         text = "Wiggling";
