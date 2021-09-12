@@ -50,11 +50,18 @@ namespace wiggle {
 
             void wiggle(std::string wiggleText, int iterations) {
                 std::string spaces = "";
-                for (unsigned int i = 0; i < iterations; i++) {
-                    spaces.resize(std::round(width * ((-1 * (std::cos((PI * i) / (height / 2)))) + 1)), ' ');
-                    std::cout << spaces << wiggleText << std::endl;
-                    std::this_thread::sleep_for(std::chrono::milliseconds(delay));
-                };
+                if(height > 1){
+                    for (unsigned int i = 0; i < iterations; i++) {
+                        spaces.resize(std::round(width * ((-1 * (std::cos((PI * i) / (height / 2)))) + 1)), ' ');
+                        std::cout << spaces << wiggleText << std::endl;
+                        std::this_thread::sleep_for(std::chrono::milliseconds(delay));
+                    }
+                }else{//bugfix, zero division when height = 1 or 0
+                    for (unsigned int i = 0; i < iterations; i++) {
+                        std::cout << wiggleText << std::endl;
+                        std::this_thread::sleep_for(std::chrono::milliseconds(delay));
+                    }
+                }
             };
 
             void wiggleInfinitely(std::string wiggleText) {
