@@ -55,38 +55,32 @@ namespace wiggle {
 
             void wiggle(std::string wiggleText, int iterations) {
                 std::string spaces = "";
-                if(height > 1){
-                    for (unsigned int i = 0; i < iterations; i++) {
+                if(height <= 1)warnHeight();
+                for (unsigned int i = 0; i < iterations; i++) {
+                    if(height > 1){
                         spaces.resize(std::round(width * ((-1 * (std::cos((PI * i) / (height / 2)))) + 1)/2), ' ');
                         std::cout << spaces << wiggleText << std::endl;
-                        std::this_thread::sleep_for(std::chrono::milliseconds(delay));
-                    }
-                }else{//bugfix, zero division when height = 1 or 0
-                    warnHeight();
-                    for (unsigned int i = 0; i < iterations; i++) {
+                    }else{
                         std::cout << wiggleText << std::endl;
-                        std::this_thread::sleep_for(std::chrono::milliseconds(delay));
                     }
+                    std::this_thread::sleep_for(std::chrono::milliseconds(delay));
                 }
             };
 
             void wiggleInfinitely(std::string wiggleText) {
                 std::string spaces = "";
                 unsigned int i = 0;
-                if(height > 1){
-                    while (true) {
+                if(height <= 1)warnHeight();
+                while (true) {
+                    if(height > 1){
                         spaces.resize(std::round(width * ((-1 * (std::cos((PI * i) / (height / 2)))) + 1)/2), ' ');
                         i++;
                         i %= height;
                         std::cout << spaces << wiggleText << std::endl;
-                        std::this_thread::sleep_for(std::chrono::milliseconds(delay));
-                    }
-                }else{//bugfix, zero division when height = 1 or 0
-                    warnHeight();
-                    while (true) {
+                    }else{
                         std::cout << spaces << wiggleText << std::endl;
-                        std::this_thread::sleep_for(std::chrono::milliseconds(delay));
                     }
+                    std::this_thread::sleep_for(std::chrono::milliseconds(delay));
                 }
             };
     };
