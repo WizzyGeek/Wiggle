@@ -37,7 +37,7 @@ namespace wiggle {
 
         public:
             Wiggler() {
-                width = 15;
+                width = 30;
                 height = 45;
                 delay = 40;
             };
@@ -47,26 +47,41 @@ namespace wiggle {
                 height = waveHeight;
                 delay = writeDelay;
             };
+            
+            void warnHeight(){
+                std::cout << "Warning, since the wiggle height (wavelength) is less than or equal to 1 line, can't wiggle." << std::endl;
+                std::cout << "next time, try wiggling with a bigger height (say 10)" << std::endl;
+            };
 
             void wiggle(std::string wiggleText, int iterations) {
                 std::string spaces = "";
+                if(height <= 1)warnHeight();
                 for (unsigned int i = 0; i < iterations; i++) {
-                    spaces.resize(std::round(width * ((-1 * (std::cos((PI * i) / (height / 2)))) + 1)), ' ');
-                    std::cout << spaces << wiggleText << std::endl;
+                    if(height > 1){
+                        spaces.resize(std::round(width * ((-1 * (std::cos((PI * i) / (height / 2)))) + 1)/2), ' ');
+                        std::cout << spaces << wiggleText << std::endl;
+                    }else{
+                        std::cout << wiggleText << std::endl;
+                    }
                     std::this_thread::sleep_for(std::chrono::milliseconds(delay));
-                };
+                }
             };
 
             void wiggleInfinitely(std::string wiggleText) {
                 std::string spaces = "";
                 unsigned int i = 0;
+                if(height <= 1)warnHeight();
                 while (true) {
-                    spaces.resize(std::round(width * ((-1 * (std::cos((PI * i) / (height / 2)))) + 1)), ' ');
-                    i++;
-                    i %= height;
-                    std::cout << spaces << wiggleText << std::endl;
+                    if(height > 1){
+                        spaces.resize(std::round(width * ((-1 * (std::cos((PI * i) / (height / 2)))) + 1)/2), ' ');
+                        i++;
+                        i %= height;
+                        std::cout << spaces << wiggleText << std::endl;
+                    }else{
+                        std::cout << spaces << wiggleText << std::endl;
+                    }
                     std::this_thread::sleep_for(std::chrono::milliseconds(delay));
-                };
+                }
             };
     };
 };
